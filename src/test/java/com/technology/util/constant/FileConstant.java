@@ -10,7 +10,7 @@ import java.io.File;
 public interface FileConstant {
 
     /**
-     *  文件分割目录
+     *  文件分割目录符号
      */
     String FILE_SEPARATOR = File.separator;
 

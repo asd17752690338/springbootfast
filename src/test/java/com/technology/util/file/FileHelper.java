@@ -21,30 +21,41 @@ public class FileHelper {
      * 默认是maven目录结构
      *
      * 未完成:不知道怎么识别出 在main下面 还是在src文件下面 该java文件
-     * @param className 文件全类名
+     * @param clz 字节码对象
      * @return
      */
-    public static File getJavaFile(String className) {
-        return new File(String.format("%s%s%s%s",FileConstant.USER_DECTORY,FileConstant.JAVA_POSTION_PREFIX,
-                Strings.directory(className), ".java"));
+    public static File getJavaFile(Class clz) {
+        return new File(getJavaPos(clz));
     }
 
     /**
      * 获取 test目录下面的class文件
-     *
-     * @param className 文件全类名
+     * @param clz 字节码对象
      * @return
      */
-    public static File getClassFile(String className) {
-        return new File(String.format("%s%s",FileHelper.class.getResource(FileConstant.FILE_SEPARATOR).getPath(),  //获取当前字节码生成的跟目录
-                Strings.directory(className), ".class"));
+    public static File getClassFile(Class clz) {
+        return new File(String.format("%s%s%s",clz.getResource("").getPath(),  //获取当前字节码生成的跟目录
+                clz.getSimpleName(), ".class"));
     }
 
 
+    public static String getJavaPos(Class clz){
+        return String.format("%s%s%s%s",FileConstant.USER_DECTORY,FileConstant.JAVA_POSTION_PREFIX,
+                Strings.directory(clz.getName()), ".java");
+    }
+
+
+
+
+
+
     public static void main(String[] args) {
-        File testJavaFile = getJavaFile(FileHelper.class.getName());
+        File testJavaFile = getJavaFile(FileHelper.class);
         System.out.println( testJavaFile.getAbsolutePath());
         System.out.println(testJavaFile.exists());
+        File classFile = getClassFile(FileHelper.class);
+        System.out.println(classFile);
+        System.out.println(classFile.exists());
     }
 
     private static void test1() {

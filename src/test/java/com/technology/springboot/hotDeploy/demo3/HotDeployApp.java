@@ -2,25 +2,29 @@ package com.technology.springboot.hotDeploy.demo3;
 
 import com.technology.util.file.FileHelper;
 import com.technology.util.file.FileListen;
+import com.technology.util.java.Compiler;
 import com.technology.util.string.Strings;
 
 import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.Method;
 
 /**
- * 试验失败, 因为字节码没有重写生成
+ * 试验失败, 因为该类的类加载器只有一个
  */
 public class HotDeployApp {
     static String className = Test.class.getName();
 
     public static void main(String[] args) {
         run();
-//        FileListen.listenFile(FileHelper.getTestJavaFile(className)
-//                , () -> {
-//                    //重新生成一下,在进行
-//                    File testClassFile = FileHelper.getTestClassFile(className);
-//
-//                });
+        FileListen.listenFile(FileHelper.getJavaFile(Test.class)
+                , () -> {
+                    File file = FileHelper.getClassFile(Test.class);
+                    file.delete();
+                    Compiler.genClass(Test.class);
+                    //重新生成一下,在进行
+                    run();
+                });
 
     }
 

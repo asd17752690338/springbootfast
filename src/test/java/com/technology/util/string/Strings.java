@@ -1,6 +1,8 @@
 package com.technology.util.string;
 
+import com.technology.springboot.hotDeploy.demo4.HelloWorld;
 import com.technology.util.constant.FileConstant;
+import com.technology.util.file.FileHelper;
 
 import java.io.File;
 
@@ -32,6 +34,9 @@ public class Strings {
         System.out.println(new File(directory(name)).exists());
 //        String fileJavaHome = FileConstant.TEST_JAVA_PREFIX+directory(name)+".java";
 //        System.out.println(new File(fileJavaHome).exists());
+
+        boolean delete = FileHelper.getClassFile(HelloWorld.class).delete();
+        System.out.println(delete);
     }
 
 

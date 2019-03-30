@@ -3,6 +3,7 @@ package com.technology.util.file;
 import com.technology.util.string.Strings;
 
 import java.io.File;
+import java.time.LocalDateTime;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -40,7 +41,7 @@ public class FileListen {
                 if (file.lastModified() > lastTime) {
                     lastTime = file.lastModified();
                     fileListenCallback.callback();  //执行文件监听之后的 动作
-                    System.out.printf("file update! time :%s\n " , file.lastModified());
+                    System.out.printf("file update! time :%s\n " , LocalDateTime.now());
                 }
             }
         }, 0, 1, TimeUnit.SECONDS);  //没隔一秒 调用该定时器

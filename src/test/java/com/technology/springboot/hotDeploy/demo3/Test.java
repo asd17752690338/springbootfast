@@ -3,7 +3,7 @@ package com.technology.springboot.hotDeploy.demo3;
 public class Test {
 
     public void run1(){
-        System.out.println("12222223asdddd1");
+        System.out.println("12222223asdddd11111111112221");
     }
     public void run2(){
         System.out.println("test run11111111112 =====");
