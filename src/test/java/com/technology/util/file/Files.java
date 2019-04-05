@@ -2,6 +2,8 @@ package com.technology.util.file;
 
 import com.technology.springboot.hotDeploy.demo3.Test;
 import com.technology.util.string.Strings;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.time.LocalDateTime;
@@ -13,8 +15,13 @@ import java.util.List;
  */
 public class Files {
 
+    private Logger LOG = LoggerFactory.getLogger(Files.class.getName());
+
+
     private Files() {
     }
+
+
 
     /**
      * 递归找出目录下的所有文件
