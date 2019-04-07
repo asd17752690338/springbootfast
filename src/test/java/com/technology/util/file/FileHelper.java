@@ -48,7 +48,6 @@ public class FileHelper {
 
 
 
-
     public static void main(String[] args) {
         File testJavaFile = getJavaFile(FileHelper.class);
         System.out.println( testJavaFile.getAbsolutePath());

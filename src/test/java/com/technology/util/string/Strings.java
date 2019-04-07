@@ -28,6 +28,14 @@ public class Strings {
         return isNullorEmpty(className)?null:className.replace(".", FileConstant.FILE_SEPARATOR);
     }
 
+
+
+
+
+
+
+
+
     public static void main(String[] args) {
         String name = Strings.class.getName();
         System.out.println(directory(name));

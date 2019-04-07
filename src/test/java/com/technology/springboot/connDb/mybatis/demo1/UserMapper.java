@@ -1,6 +1,7 @@
 package com.technology.springboot.connDb.mybatis.demo1;
 
 import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.mapping.StatementType;
 
 import java.util.List;
 
@@ -24,9 +25,28 @@ public interface UserMapper {
     @InsertProvider(type =UserBatchProvider.class,method = "batchInsert")
     void  batchInsert(@Param("users") List<User> users);
 
+    @Select({"call selectUser"})
+    @Options(statementType= StatementType.CALLABLE)
+    @Results(
+            {@Result(property = "userAccount",column = "user_account")}
+    )
+    List<User> callProducer();
+
+    @Select({"call selectUserById(#{id,mode=IN,jdbcType=BIGINT})"})
+    @Options(statementType= StatementType.CALLABLE)
+    @Results(
+            {@Result(property = "userAccount",column = "user_account")}
+    )
+    User callUserById(Long id);  //默认不要输入参数
+
+    @Select({"call selectCount(#{count,mode=OUT,jdbcType=BIGINT})"})
+    @Options(statementType= StatementType.CALLABLE)
+    Long callCount(@Param("count") Long count);  //这里的返回值没有得到,可能是需要map才会设置
 
 
-
+    @Select({"call selectCount(#{count,mode=OUT,jdbcType=BIGINT})"})
+    @Options(statementType= StatementType.CALLABLE)
+    Long callCount2(MyData myData);
 
 
 
